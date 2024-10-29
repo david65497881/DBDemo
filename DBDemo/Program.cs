@@ -26,6 +26,8 @@ namespace DBDemo
                 connection.Open();
 
                 // 建立 Employees 資料表
+                //SQLite使用動態欄位型態。SQLite的動態欄位型態可以向後相容多數的靜態欄位型態
+                //INTEGER會根據數值的大小儲存在1 2 3 4 6 8(byte)裡。跟INT具有親和性
                 string createTableQuery = @"
                 CREATE TABLE IF NOT EXISTS Employees (
                     id INTEGER PRIMARY KEY,
@@ -39,6 +41,7 @@ namespace DBDemo
 
             Console.WriteLine("資料庫和資料表建立成功。");
             Console.ReadLine(); 
+
         }
     }
     
