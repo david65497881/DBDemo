@@ -21,7 +21,7 @@ namespace DBDemo
             {
                 connection.Open();
 
-                // 插入資料
+                // 插入資料。使用SQLite的INSERT OR REPLACE語法來覆蓋資料
                 string insertDataQuery = @"
                 INSERT OR REPLACE INTO Employees (id, name, salary, managerId) VALUES (1, 'Joe', 70000, 3);
                 INSERT OR REPLACE INTO Employees (id, name, salary, managerId) VALUES (2, 'Henry', 80000, 4);
