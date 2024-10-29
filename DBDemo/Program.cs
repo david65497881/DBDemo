@@ -25,20 +25,20 @@ namespace DBDemo
             {
                 connection.Open();
 
-                // 建立 Employees 資料表
-                string createTableQuery = @"
-                CREATE TABLE IF NOT EXISTS Employees (
-                    id INTEGER PRIMARY KEY,
-                    name VARCHAR(100),
-                    salary INTEGER,
-                    managerId INTEGER
-                );";
+                // 插入資料
+                string insertDataQuery = @"
+                INSERT INTO Employees (id, name, salary, managerId) VALUES (1, 'Joe', 70000, 3);
+                INSERT INTO Employees (id, name, salary, managerId) VALUES (2, 'Henry', 80000, 4);
+                INSERT INTO Employees (id, name, salary, managerId) VALUES (3, 'Sam', 60000, NULL);
+                INSERT INTO Employees (id, name, salary, managerId) VALUES (4, 'Max', 90000, NULL);
+            ";
 
-                connection.Execute(createTableQuery);
+                connection.Execute(insertDataQuery);
+
+                Console.WriteLine("資料插入成功。");
+                Console.ReadLine();
             }
-
-            Console.WriteLine("資料庫和資料表建立成功。");
-            Console.ReadLine(); 
+          
         }
     }
     
