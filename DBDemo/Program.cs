@@ -25,20 +25,17 @@ namespace DBDemo
             {
                 connection.Open();
 
-                // 插入資料
-                string insertDataQuery = @"
-                INSERT INTO Employees (id, name, salary, managerId) VALUES (1, 'Joe', 70000, 3);
-                INSERT INTO Employees (id, name, salary, managerId) VALUES (2, 'Henry', 80000, 4);
-                INSERT INTO Employees (id, name, salary, managerId) VALUES (3, 'Sam', 60000, NULL);
-                INSERT INTO Employees (id, name, salary, managerId) VALUES (4, 'Max', 90000, NULL);
-            ";
+                // 查詢非管理職員工
+                var nonManagerialEmployees = connection.Query<string>("SELECT name FROM Employees WHERE managerId IS NOT NULL");
 
-                connection.Execute(insertDataQuery);
-
-                Console.WriteLine("資料插入成功。");
+                Console.WriteLine("非管理職員工：");
+                foreach (var employee in nonManagerialEmployees)
+                {
+                    Console.WriteLine(employee);
+                }
                 Console.ReadLine();
             }
-          
+
         }
     }
     
