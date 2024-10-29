@@ -19,21 +19,17 @@ namespace DBDemo
             {
                 connection.Open();
 
-                // 查詢非管理職且薪資高於其主管的員工
-                var result = connection.Query<string>(@"
-                SELECT e1.name AS Employee
-                FROM Employees e1
-                JOIN Employees e2 ON e1.managerId = e2.id
-                WHERE e1.salary > e2.salary
-            ");
+                // 查詢資料表中的所有數據
+                var employees = connection.Query("SELECT * FROM Employees");
 
-                Console.WriteLine("非管理職且薪資高於其主管的員工：");
-                foreach (var employee in result)
+                Console.WriteLine("Employees Table Data:");
+                foreach (var employee in employees)
                 {
                     Console.WriteLine(employee);
                 }
                 Console.ReadLine();
             }
+
 
         }
     }
