@@ -15,12 +15,6 @@ namespace DBDemo
         {
             string connectionString = "Data Source=database.db;Version=3;";
 
-            // 檢查資料庫檔案是否存在；如果不存在，則建立
-            if (!File.Exists("./database.db"))
-            {
-                SQLiteConnection.CreateFile("database.db");
-            }
-
             using (var connection = new SQLiteConnection(connectionString))
             {
                 connection.Open();
@@ -30,6 +24,26 @@ namespace DBDemo
 
                 Console.WriteLine("非管理職員工：");
                 foreach (var employee in nonManagerialEmployees)
+                {
+                    Console.WriteLine(employee);
+                }
+                Console.ReadLine();
+            }
+
+            using (var connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+
+                // 查詢非管理職且薪資高於其主管的員工
+                var result = connection.Query<string>(@"
+                SELECT e1.name AS Employee
+                FROM Employees e1
+                JOIN Employees e2 ON e1.managerId = e2.id
+                WHERE e1.salary > e2.salary
+            ");
+
+                Console.WriteLine("非管理職且薪資高於其主管的員工：");
+                foreach (var employee in result)
                 {
                     Console.WriteLine(employee);
                 }
