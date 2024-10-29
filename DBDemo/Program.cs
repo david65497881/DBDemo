@@ -15,11 +15,7 @@ namespace DBDemo
         {
             string connectionString = "Data Source=database.db;Version=3;";
 
-            // 檢查資料庫檔案是否存在；如果不存在，則建立
-            if (!File.Exists("./database.db"))
-            {
-                SQLiteConnection.CreateFile("database.db");
-            }
+            
 
             using (var connection = new SQLiteConnection(connectionString))
             {
@@ -27,10 +23,10 @@ namespace DBDemo
 
                 // 插入資料
                 string insertDataQuery = @"
-                INSERT INTO Employees (id, name, salary, managerId) VALUES (1, 'Joe', 70000, 3);
-                INSERT INTO Employees (id, name, salary, managerId) VALUES (2, 'Henry', 80000, 4);
-                INSERT INTO Employees (id, name, salary, managerId) VALUES (3, 'Sam', 60000, NULL);
-                INSERT INTO Employees (id, name, salary, managerId) VALUES (4, 'Max', 90000, NULL);
+                INSERT OR REPLACE INTO Employees (id, name, salary, managerId) VALUES (1, 'Joe', 70000, 3);
+                INSERT OR REPLACE INTO Employees (id, name, salary, managerId) VALUES (2, 'Henry', 80000, 4);
+                INSERT OR REPLACE INTO Employees (id, name, salary, managerId) VALUES (3, 'Sam', 60000, NULL);
+                INSERT OR REPLACE INTO Employees (id, name, salary, managerId) VALUES (4, 'Max', 90000, NULL);
             ";
 
                 connection.Execute(insertDataQuery);
