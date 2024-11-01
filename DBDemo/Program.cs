@@ -22,7 +22,7 @@ namespace DBDemo
 
             if (!File.Exists(reportPath))
             {
-                Console.WriteLine("報表模板文件不存在。請確認 report.frx 存在於專案目錄中。");
+                Console.WriteLine("報表文件不存在。請確認 report.frx 存在於專案目錄中。");
                 return;
             }
 
@@ -68,13 +68,13 @@ namespace DBDemo
                     var higherSalaryTextObject = report.FindObject("Text4") as FastReport.TextObject; 
                     if (higherSalaryTextObject != null)
                     {
-                        higherSalaryTextObject.Text = higherSalaryEmployeesText.ToString();
+                        higherSalaryTextObject.Text = higherSalaryEmployeesText.ToString(); 
                     }
 
                     //準備報表，這個方法會計算所有表達式和數據綁定，並將報表的頁面渲染到內存中。
                     report.Prepare();
 
-                    //using 確保使用後釋放資源
+                    //using 確保試用後釋放資源
                     //PDFSimpleExport是FastReport提供的一個類別，用於將報表輸出為PDF格式
                     using (PDFSimpleExport pdfExport = new PDFSimpleExport())
                     {
